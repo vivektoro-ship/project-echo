@@ -20,4 +20,4 @@ python3 -m http.server 8137
 
 No build step. Screens live in `assets/screens/` (3× exports from Figma).
 
-*Built from the Figma file `c-meal / admin` and the Echo engineering spec.*
+*Built from the Oro Px admin Figma file and the Project Echo engineering spec.*
