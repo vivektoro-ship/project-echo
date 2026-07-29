@@ -96,10 +96,11 @@ img{max-width:100%}
 .phone{width:100%;max-width:var(--devw);background:#fff;border:1px solid var(--rule);border-radius:32px;padding:8px;
   box-shadow:0 26px 52px -26px rgba(150,80,0,.32),0 2px 8px rgba(0,0,0,.05)}
 .phone .notch{width:38%;height:5px;background:var(--rule);border-radius:99px;margin:2px auto 8px}
-/* The viewer is sized to the TALLEST frame in the set (375x925). Every
-   screenshot therefore fills the full width — no side gaps — and shorter
-   frames (832-888) leave a little white at the bottom, which reads as the
-   app screen ending. The device itself never changes size between screens. */
+/* The viewer takes each screenshot's own aspect ratio (set from the image's
+   natural size as it loads), so every screen fills the frame exactly — no
+   white down the side, none at the bottom. Frames run 832-925px tall, so the
+   device height varies by about 11% across the set. 375:925 is the pre-load
+   fallback. */
 .phone .screen{position:relative;border-radius:25px;overflow:hidden;background:#fff;border:1px solid var(--rule-soft);
   aspect-ratio:375/925;height:auto}
 .phone .screen img{display:block;width:100%;height:100%;object-fit:contain;object-position:top center;background:#fff;cursor:pointer}
@@ -304,6 +305,8 @@ function renderTabs(){
 function render(){
   const f=flow(), d=f.screens[idx], dots=[...dotsEl.children];
   img.src=B+d.i; img.alt=d.t;
+  const fit=()=>{ if(img.naturalWidth&&img.naturalHeight) scr.style.aspectRatio=img.naturalWidth+'/'+img.naturalHeight; };
+  if(img.complete) fit(); else img.onload=fit;
   num.textContent=idx+1; of.textContent='/ '+f.screens.length;
   lab.textContent=d.l; tit.textContent=d.t; cap.textContent=d.c||'';
   prev.disabled=idx===0; next.disabled=idx===f.screens.length-1;
