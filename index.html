@@ -75,9 +75,6 @@ img{max-width:100%}
 .flowtab b{font-family:var(--display);font-weight:600;font-size:12px;color:var(--orange)}
 .flowtab.active b{color:var(--amber-bright)}
 
-.flowintro{margin-top:20px}
-.flowintro h3{font-family:var(--display);font-weight:600;font-size:clamp(19px,4.8vw,27px);letter-spacing:-.01em}
-.flowintro p{font-size:14.5px;line-height:1.55;color:var(--ink-soft);margin-top:7px;max-width:44rem}
 
 /* progress */
 .pbar{height:2px;background:var(--rule-soft);position:relative;overflow:hidden;margin-top:16px}
@@ -201,7 +198,6 @@ footer{text-align:center;padding:44px 0 60px;color:var(--ink-faded);font-family:
   <section class="flows" id="flows">
     <div class="phead"><span class="pk">Walkthrough</span><h2>Every flow, screen by screen</h2><span class="pc" id="fc"></span></div>
     <div class="flowtabs" id="flowtabs"></div>
-    <div class="flowintro" id="flowintro"></div>
     <div class="pbar"><i id="prog"></i></div>
     <div class="dots" id="dots"></div>
     <div class="player" id="player"></div>
@@ -269,7 +265,7 @@ const FLOWS=[
 ]},
 ];
 
-const tabsEl=document.getElementById('flowtabs'), introEl=document.getElementById('flowintro'),
+const tabsEl=document.getElementById('flowtabs'),
       playerEl=document.getElementById('player'), dotsEl=document.getElementById('dots'),
       progEl=document.getElementById('prog'), fcEl=document.getElementById('fc');
 
@@ -297,7 +293,6 @@ function flow(){return FLOWS[flowIdx];}
 
 function renderTabs(){
   [...tabsEl.children].forEach((b,i)=>b.classList.toggle('active',i===flowIdx));
-  introEl.innerHTML=`<h3>${flow().t}</h3><p>${flow().s}</p>`;
   dotsEl.innerHTML=flow().screens.map((d,i)=>`<button class="dot" data-i="${i}" title="${d.t}">${i+1}</button>`).join('');
 }
 function render(){
