@@ -50,10 +50,6 @@ img{max-width:100%}
 
 /* flow section */
 .flows{padding:34px 0 8px}
-.phead{display:flex;align-items:baseline;gap:11px;border-bottom:2px solid var(--ink);padding-bottom:12px;flex-wrap:wrap}
-.phead .pk{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--orange)}
-.phead h2{font-family:var(--display);font-weight:600;font-size:clamp(21px,5.6vw,34px);letter-spacing:-.015em}
-.phead .pc{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faded);margin-left:auto}
 
 /* flow tabs — horizontally scrollable on mobile */
 .flowtabs{display:flex;gap:7px;margin-top:16px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;-ms-overflow-style:none;
@@ -190,7 +186,6 @@ footer{text-align:center;padding:44px 0 60px;color:var(--ink-faded);font-family:
 
 
   <section class="flows" id="flows">
-    <div class="phead"><span class="pk">Walkthrough</span><h2>Every flow, screen by screen</h2><span class="pc" id="fc"></span></div>
     <div class="flowtabs" id="flowtabs"></div>
     <div class="pbar"><i id="prog"></i></div>
     <div class="dots" id="dots"></div>
@@ -287,11 +282,10 @@ const FLOWS=[
 
 const tabsEl=document.getElementById('flowtabs'),
       playerEl=document.getElementById('player'), dotsEl=document.getElementById('dots'),
-      progEl=document.getElementById('prog'), fcEl=document.getElementById('fc');
+      progEl=document.getElementById('prog');
 
 let flowIdx=0, idx=0, prevIdx=-1;
 const total=FLOWS.reduce((n,f)=>n+f.screens.length,0);
-fcEl.textContent=total+' screens · '+FLOWS.length+' flows';
 
 tabsEl.innerHTML=FLOWS.map((f,i)=>
   `<button class="flowtab" data-f="${i}"><b>${String(i+1).padStart(2,'0')}</b>${f.n}</button>`).join('');
@@ -374,10 +368,8 @@ function probe(src){return new Promise(r=>{const im=new Image();im.onload=()=>r(
     f.screens=f.screens.filter((_,i)=>ok[i]);
     return f.screens.length>0;
   }));
-  const pending=FLOWS.filter((_,i)=>!keep[i]).length;
   for(let i=FLOWS.length-1;i>=0;i--) if(!keep[i]) FLOWS.splice(i,1);
   const shown=FLOWS.reduce((n,f)=>n+f.screens.length,0);
-  fcEl.textContent=shown+' screens · '+FLOWS.length+(FLOWS.length===1?' flow':' flows')+(pending?' · more landing':'');
   flowIdx=0; idx=0; prevIdx=-1;
   tabsEl.innerHTML=FLOWS.map((f,i)=>
     `<button class="flowtab" data-f="${i}"><b>${String(i+1).padStart(2,'0')}</b>${f.n}</button>`).join('');
