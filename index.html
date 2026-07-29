@@ -323,7 +323,11 @@ function render(){
   num.textContent=String(idx+1).padStart(2,'0'); of.textContent='of '+f.screens.length;
   lab.textContent=d.l; tit.innerHTML=d.t; cap.innerHTML=d.c||'';
   const isQ=!!d.c; cap.style.display=isQ?'':'none'; tit.classList.toggle('label',!isQ);
-  prev.disabled=idx===0; next.disabled=idx===f.screens.length-1;
+  const atEnd=idx===f.screens.length-1, atStart=idx===0;
+  const hasNext=flowIdx<FLOWS.length-1, hasPrev=flowIdx>0;
+  next.disabled=atEnd&&!hasNext; prev.disabled=atStart&&!hasPrev;
+  next.innerHTML=atEnd&&hasNext?'Next flow →':'Next →';
+  prev.innerHTML=atStart&&hasPrev?'← Previous flow':'← Prev';
   if(scr) scr.scrollTop=0;
   dots.forEach((b,i)=>{b.classList.toggle('active',i===idx);b.classList.toggle('done',i<idx);});
   progEl.style.width=((idx+1)/f.screens.length*100)+'%';
@@ -338,8 +342,10 @@ function render(){
   prevIdx=idx;
   playerEl.className='player'+(flowIdx%2?' rev':'');
 }
-prev.onclick=()=>{if(idx>0){idx--;render();}};
-next.onclick=()=>{if(idx<flow().screens.length-1){idx++;render();}};
+function goFlow(i,last){flowIdx=i;idx=last?FLOWS[i].screens.length-1:0;prevIdx=-1;renderTabs();render();
+  document.getElementById('flows').scrollIntoView({block:'start'});}
+prev.onclick=()=>{ if(idx>0){idx--;render();return;} if(flowIdx>0) goFlow(flowIdx-1,true); };
+next.onclick=()=>{ if(idx<flow().screens.length-1){idx++;render();return;} if(flowIdx<FLOWS.length-1) goFlow(flowIdx+1,false); };
 tabsEl.onclick=e=>{const b=e.target.closest('.flowtab');if(b){flowIdx=+b.dataset.f;idx=0;prevIdx=-1;renderTabs();render();
   document.getElementById('flows').scrollIntoView({block:'start'});}};
 dotsEl.onclick=e=>{const b=e.target.closest('.dot');if(b){idx=+b.dataset.i;render();}};
