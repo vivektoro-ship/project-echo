@@ -91,6 +91,14 @@ img{max-width:100%}
   aspect-ratio:375/925;height:auto}
 .phone .screen img{display:block;width:100%;height:100%;object-fit:contain;object-position:top center;background:#fff;cursor:pointer}
 
+/* helper highlight + intro card */
+.hl{position:absolute;display:none;z-index:5;border:2.5px solid #e02b1b;border-radius:7px;
+  box-shadow:0 0 0 3px rgba(224,43,27,.16);pointer-events:none;animation:hlin .35s ease}
+@keyframes hlin{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:none}}
+.intro{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:28px;
+  background:linear-gradient(160deg,var(--orange),var(--orange-deep));color:#fff}
+.intro span{font-family:var(--display);font-weight:600;font-size:clamp(24px,7vw,34px);line-height:1.1;letter-spacing:-.01em}
+
 /* section-intro flash */
 .frameflash{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:26px;
   background:linear-gradient(160deg,var(--orange),var(--orange-deep));color:#fff;opacity:0;visibility:hidden;pointer-events:none;
@@ -173,14 +181,14 @@ footer{text-align:center;padding:44px 0 60px;color:var(--ink-faded);font-family:
 <div class="topbar"><div class="inner">
   <span class="mark">E</span>
   <span class="nm">Echo</span>
-  <span class="tag">Oro Px · Issue Reporting</span>
+  <span class="tag">Oro Px · Report an issue</span>
 </div></div>
 
 <div class="wrap">
   <div class="mast">
     <div class="kicker">Field-staff issue reporting</div>
     <h1>Report an issue.<br>Follow it to <em>resolved</em>.</h1>
-    <p class="dek">You face an issue during a visit. Tap the orange flag. The app attaches the visit details and the support team receives it. You follow the status in the app.</p>
+    <p class="dek">Tap the orange flag. The app fills in the visit details. Follow the status until it is resolved.</p>
     <div class="orn"><span class="ln"></span><span class="gl">✦</span><span class="ln"></span></div>
   </div>
 
@@ -205,78 +213,33 @@ const B='assets/screens/';
 
 /* Each flow: k=key, n=tab name, t=intro title, s=intro sub, screens[{i,l,t,c}] */
 const FLOWS=[
-{k:'visit',n:'Report from a visit',t:'Report from a visit',s:'',screens:[
- {i:'d01.png',l:'Reporting',t:'You face an issue during a visit. What do you do?',c:'Tap the orange flag at the bottom.'},
- {i:'d02.png',l:'Reporting',t:'A step failed. Where do you report it?',c:'Tap the orange flag on the visit.'},
- {i:'d03.png',l:'Reporting',t:'Do you have to type the visit details?',c:'No. The app adds them.'},
- {i:'d04.png',l:'Reporting',t:'What do you fill in?',c:'Issue type, a description, and proof.'},
- {i:'d05.png',l:'Reporting',t:'How do you add proof?',c:'Attach it from the form.'},
- {i:'d06.png',l:'Reporting',t:'Can you see the proof before you send?',c:'Yes. Open it from the form.'},
- {i:'d07.png',l:'Reporting',t:'Can you add more than one proof?',c:'Yes. Attach as many as needed.'},
- {i:'d08.png',l:'Submit',t:'How do you send the report?',c:'Tap <b>Submit</b>.'},
- {i:'d09.png',l:'Submit',t:'How do you know it was sent?',c:'The app confirms it.'},
- {i:'d10.png',l:'After you submit',t:'Reported. What now?',c:'The support team has your visit details.'},
- {i:'d11.png',l:'After you submit',t:'Where do you see the issue you reported?',c:'Open the report.'},
- {i:'d12.png',l:'After you submit',t:'Are your description and proof kept?',c:'Yes. Both stay on the report.'},
- {i:'d13.png',l:'After you submit',t:'You have more detail to add. What do you do?',c:'Open the report and add it.'},
- {i:'d14.png',l:'Status',t:'The status shows <b>Being looked at</b>. What do you do?',c:'Nothing. The support team is working on it.'},
- {i:'d15.png',l:'Reply',t:'The status shows <b>Awaiting your reply</b>. What do you do?',c:'Open the report. Answer the question.'},
- {i:'d16.png',l:'Reply',t:'Where do you type your answer?',c:'In the reply box.'},
- {i:'d17.png',l:'Reply',t:'You have typed your answer. What next?',c:'Send it.'},
- {i:'d18.png',l:'Reply',t:'How do you know it is sending?',c:'The app shows it is sending.'},
- {i:'d19.png',l:'Reply',t:'Is your reply kept?',c:'Yes. It stays on the report.'},
- {i:'d20.png',l:'Reply',t:'How many times can you reply?',c:'1 reply only. Answer fully. You can nudge after.'},
- {i:'d21.png',l:'Resolved',t:'How do you know the issue is resolved?',c:'The status shows <b>Resolved</b>.'},
+{k:'a',n:'A. Report an issue',screens:[
+ {i:'',t:'Report an issue',h:null},
+ {i:'s01.png',t:'Visit detail page — tap the orange <b>flag</b> to report an issue',h:[78,72,15,7]},
+ {i:'s02.png',t:'The app fills the <b>Auto-captured details</b> for you',h:[6,77,88,6]},
+ {i:'s03.png',t:'Describe the issue in simple lines',h:[2.7,43,94,12]},
+ {i:'s04.png',t:'Attachment sheet — choose how you want to attach',h:[4,56,44,6]},
+ {i:'s05.png',t:'Attached Files — check the files and tap <b>Done</b>',h:[46,5,50,6]},
+ {i:'s06.png',t:'Once all details are added, tap <b>Report Issue</b>',h:[4,90,92,8]},
+ {i:'s07.png',t:'Your issue is going to the tech team',h:[14,37,72,20]},
+ {i:'s08.png',t:'<b>Reported</b> — your report number is created',h:[28,81,44,6]},
 ]},
-{k:'home',n:'Report from home',t:'Report from home',s:'',screens:[
- {i:'h01.png',l:'Reporting',t:'You are not inside a visit. Where do you report?',c:'Open <b>My Reports</b>. Tap <b>Report an issue</b>.'},
- {i:'h02.png',l:'Reporting',t:'Do you need a visit open to report?',c:'No. You can report from home.'},
- {i:'h03.png',l:'Reporting',t:'You have not reported anything yet. What do you see?',c:'An empty list.'},
- {i:'h04.png',l:'Reporting',t:'The form is blank. Why?',c:'You are outside a visit. Search the visit ID.'},
- {i:'h05.png',l:'Reporting',t:'How do you attach the visit to your report?',c:'Type the visit ID and select it.'},
- {i:'h06.png',l:'Reporting',t:'This visit already has an open issue. What do you do?',c:'Tap <b>Nudge Issue</b>. Do not report again.'},
- {i:'h07.png',l:'Reporting',t:'How do you set the issue type?',c:'Select it from the list.'},
- {i:'h08.png',l:'Reporting',t:'What do you write?',c:'Describe what happened.'},
- {i:'h09.png',l:'Reporting',t:'How do you add proof here?',c:'Attach it from the form.'},
- {i:'h10.png',l:'Submit',t:'What do you get after you submit?',c:'A report number.'},
- {i:'h11.png',l:'After you submit',t:'Where do you see the issue you reported?',c:'In <b>My Reports</b>.'},
- {i:'h12.png',l:'After you submit',t:'You have more detail. What do you do?',c:'Open the report and add it.'},
- {i:'h13.png',l:'After you submit',t:'You have written the detail. What next?',c:'Send it.'},
- {i:'h14.png',l:'Status',t:'The status shows <b>Being looked at</b>. What does it mean?',c:'The support team is working on it.'},
- {i:'h15.png',l:'Status',t:'The status shows <b>Awaiting your reply</b>. What does it mean?',c:'The support team needs one detail.'},
- {i:'h16.png',l:'Reply',t:'Where do you answer?',c:'In the reply box.'},
- {i:'h17.png',l:'Reply',t:'How do you know it is sending?',c:'The app shows it is sending.'},
- {i:'h18.png',l:'Reply',t:'Is your reply kept?',c:'Yes. It stays on the report.'},
- {i:'h19.png',l:'Reply',t:'How do you know the reply reached them?',c:'The app confirms it.'},
- {i:'h20.png',l:'Resolved',t:'How do you know the issue is resolved?',c:'The status shows <b>Resolved</b>.'},
- {i:'h21.png',l:'Draft',t:'You cannot finish the report now. What happens?',c:'It stays as a <b>Draft</b> in <b>My Reports</b>.'},
+{k:'b',n:'B. Track your issue',screens:[
+ {i:'s09.png',t:'Status is <b>Reported</b> — wait for the team to pick it up',h:[0,14,100,5]},
+ {i:'s10.png',t:'<b>Ask for an update</b> — choose a line and change it if you want',h:[4,40,84,7]},
+ {i:'s11.png',t:'Add an attachment with your update and send',h:[8,79,14,7]},
+ {i:'s12.png',t:'Status turns <b>Being looked at</b> once the team picks it up — you can ask again after 5 minutes',h:[3,89,94,6]},
 ]},
-{k:'sales',n:'From a sales visit',t:'Sales visit',s:'',screens:[
- {i:'sv01.png',l:'Reporting',t:'You do sales visits and partner visits. Where do you report?',c:'From the same home screen.'},
- {i:'sv02.png',l:'Reporting',t:'How do you report from a sales visit?',c:'Open the visit list. Select the visit.'},
- {i:'sv03.png',l:'Reporting',t:'The visit has not started. Can you report?',c:'Yes. Report before it starts.'},
+{k:'c',n:'C. Respond to the support team',screens:[
+ {i:'s13.png',t:'The team needs one more detail — tap <b>Respond Issue</b>',h:[3,84,92,8]},
+ {i:'s14.png',t:'Write your answer in one line',h:[3.5,35,93,22]},
+ {i:'s15.png',t:'<b>Attach files (optional)</b> — add a file if it helps',h:[4,58,44,7]},
+ {i:'s16.png',t:'Check your answer and send',h:[4,84,92,8]},
+ {i:'s17.png',t:'<b>Responded</b> — the team is on it',h:[28,67,44,8]},
+ {i:'s18.png',t:'Status goes back to <b>Being looked at</b>, your answer is in the timeline',h:[3,14,94,6]},
 ]},
-{k:'list',n:'My Reports',t:'My Reports',s:'',screens:[
- {i:'lp01.png',l:'My Reports',t:'Where do you go to see or report issues?',c:'Open <b>My Reports</b> from home.'},
- {i:'lm01.png',l:'My Reports',t:'Where will the issues you reported be?',c:'In <b>My Reports</b>.'},
- {i:'rv01.png',l:'My Reports',t:'Where do you see issues still open?',c:'In the <b>In progress</b> tab.'},
- {i:'rv02.png',l:'My Reports',t:'Where do you see resolved issues?',c:'In the <b>Resolved</b> tab.'},
- {i:'lp02.png',l:'My Reports',t:'Will you see other partners\' reports?',c:'No. You see your own reports.'},
- {i:'lm02.png',l:'My Reports',t:'One visit has two issues. What do you see?',c:'Each issue is listed separately.'},
- {i:'fl02.png',l:'My Reports',t:'How do you find one issue in a long list?',c:'Filter by partner, or search the visit ID.'},
- {i:'se02.png',l:'My Reports',t:'You searched before. Is it kept?',c:'Yes. Recent searches are kept.'},
- {i:'se03.png',l:'My Reports',t:'Nothing matches. What do you do?',c:'Correct the visit ID and search again.'},
-]},
-{k:'cancel',n:'Cancelled report',t:'Cancelled report',s:'',screens:[
- {i:'cx01.png',l:'Cancelled',t:'How do you cancel the issue?',c:'Open the report. Tap the cancel option.'},
- {i:'cx02.png',l:'Cancelled',t:'Will it ask you to confirm the cancel?',c:'Yes. Confirm once.'},
- {i:'cx03.png',l:'Cancelled',t:'The status shows <b>Cancelled</b>. What does it mean?',c:'The report is cancelled. The reason is inside.'},
-]},
-{k:'edges',n:'Other states',t:'Other states',s:'',screens:[
- {i:'ed01.png',l:'Other',t:'You opened the report form. What is filled already?',c:'The visit details. You add the rest.'},
- {i:'ed02.png',l:'Other',t:'You have written your reply. What next?',c:'Send it.'},
- {i:'ed03.png',l:'Other',t:'Your issues are loading. What do you see?',c:'Placeholder rows.'},
- {i:'ed04.png',l:'Other',t:'Does the report form open the same way elsewhere?',c:'Yes. The same form opens.'},
+{k:'d',n:'D. Resolved',screens:[
+ {i:'s19.png',t:'<b>Issue Resolved</b> — the team has fixed it, with the date shown',h:[3,14,94,6]},
 ]},
 ];
 
@@ -291,17 +254,17 @@ tabsEl.innerHTML=FLOWS.map((f,i)=>
   `<button class="flowtab" data-f="${i}"><b>${String(i+1).padStart(2,'0')}</b>${f.n}</button>`).join('');
 
 playerEl.innerHTML=
-  `<div class="stephead"><span class="steplabel" id="plab"></span><h4 id="ptit"></h4></div>`+
+  `<div class="stephead"><h4 id="ptit"></h4></div>`+
   `<div class="framecol"><div class="phone"><div class="notch"></div><div class="screen">`+
-  `<img id="pimg" alt=""><div class="frameflash" id="pflash"><span class="k">Next up</span><h5></h5><p class="sub"></p></div>`+
+  `<img id="pimg" alt=""><div class="hl" id="phl"></div><div class="intro" id="pintro"></div>`+
   `</div></div></div>`+
-  `<div class="stepbody"><p class="cap" id="pcap"></p></div>`+
+
   `<div class="controls"><div class="count"><b id="pnum"></b><i id="pof"></i></div>`+
   `<div class="btnrow"><button class="nav" id="pprev">← Prev</button><button class="nav primary" id="pnext">Next →</button></div></div>`;
 
 const q=s=>document.querySelector(s);
-const img=q('#pimg'),num=q('#pnum'),of=q('#pof'),lab=q('#plab'),tit=q('#ptit'),cap=q('#pcap'),
-      prev=q('#pprev'),next=q('#pnext'),scr=q('.screen'),flash=q('#pflash');
+const img=q('#pimg'),num=q('#pnum'),of=q('#pof'),tit=q('#ptit'),hl=q('#phl'),intro=q('#pintro'),
+      prev=q('#pprev'),next=q('#pnext'),scr=q('.screen');
 
 function flow(){return FLOWS[flowIdx];}
 
@@ -311,12 +274,17 @@ function renderTabs(){
 }
 function render(){
   const f=flow(), d=f.screens[idx], dots=[...dotsEl.children];
-  img.src=B+d.i; img.alt=d.t;
+  const isIntro=!d.i;
+  intro.style.display=isIntro?'flex':'none';
+  intro.innerHTML=isIntro?('<span>'+d.t+'</span>'):'';
+  img.style.display=isIntro?'none':'';
+  if(!isIntro){ img.src=B+d.i; img.alt=d.t.replace(/<[^>]+>/g,''); }
+  tit.innerHTML=d.t;
+  if(d.h && !isIntro){ hl.style.display='block'; hl.style.left=d.h[0]+'%'; hl.style.top=d.h[1]+'%';
+                       hl.style.width=d.h[2]+'%'; hl.style.height=d.h[3]+'%'; }
+  else hl.style.display='none';
   const fit=()=>{ if(img.naturalWidth&&img.naturalHeight) scr.style.aspectRatio=img.naturalWidth+'/'+img.naturalHeight; };
-  if(img.complete) fit(); else img.onload=fit;
-  num.textContent=String(idx+1).padStart(2,'0'); of.textContent='of '+f.screens.length;
-  lab.textContent=d.l; tit.innerHTML=d.t; cap.innerHTML=d.c||'';
-  const isQ=!!d.c; cap.style.display=isQ?'':'none'; tit.classList.toggle('label',!isQ);
+  if(!isIntro){ if(img.complete) fit(); else img.onload=fit; } else scr.style.aspectRatio='375/835';
   const atEnd=idx===f.screens.length-1, atStart=idx===0;
   const hasNext=flowIdx<FLOWS.length-1, hasPrev=flowIdx>0;
   next.disabled=atEnd&&!hasNext; prev.disabled=atStart&&!hasPrev;
@@ -326,13 +294,6 @@ function render(){
   dots.forEach((b,i)=>{b.classList.toggle('active',i===idx);b.classList.toggle('done',i<idx);});
   progEl.style.width=((idx+1)/f.screens.length*100)+'%';
   const ad=dots[idx]; if(ad&&ad.scrollIntoView) ad.scrollIntoView({block:'nearest',inline:'center'});
-  const fwd=idx>prevIdx, start=idx===0||f.screens[idx].l!==f.screens[idx-1].l;
-  if(fwd&&start){
-    flash.querySelector('h5').textContent=d.l;
-    flash.querySelector('.sub').textContent=f.t;
-    flash.classList.add('show');
-    clearTimeout(flash._t); flash._t=setTimeout(()=>flash.classList.remove('show'),950);
-  }else{flash.classList.remove('show');clearTimeout(flash._t);}
   prevIdx=idx;
   playerEl.className='player'+(flowIdx%2?' rev':'');
 }
