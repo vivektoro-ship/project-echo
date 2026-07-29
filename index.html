@@ -223,8 +223,8 @@ const B='assets/screens/';
 const FLOWS=[
 {k:'visit',n:'From a visit',t:'A blocker, reported from the visit itself',s:'An agent hits a failed step mid-visit and follows the ticket to resolved.',screens:[
  {i:'d01.png',l:'Trigger',t:'A visit, in progress',c:'Fresh loan visit OMV00010010 at Federal Bank Chennai — the orange flag waits in the corner.'},
- {i:'d02.png',l:'Trigger',t:'A step fails',c:'eSign will not go through. The blocker that used to become a WhatsApp message.'},
- {i:'d03.png',l:'Report',t:'Say what happened',c:'Visit ID, category and city arrive pre-filled; the agent types only what went wrong.'},
+ {i:'d02.png',l:'Trigger',t:'A step fails',c:'The visit’s eight steps: Customer Verification done, eKYC failed with Retry again, everything after it pending. The agent is blocked, not just slowed.'},
+ {i:'d03.png',l:'Report',t:'Say what happened',c:'Visit ID, the failed step’s category (eKYC) and city arrive pre-filled; the agent types only what went wrong.'},
  {i:'d04.png',l:'Report',t:'Attach the evidence',c:'Attaching is optional — the error screenshot, code and app version are captured for you.'},
  {i:'d05.png',l:'Report',t:'Evidence attached',c:'The attachment lands on the report, reviewable before anything is filed.'},
  {i:'d06.png',l:'Report',t:'Check before sending',c:'Full-size check that the evidence actually shows the failure.'},
@@ -251,7 +251,7 @@ const FLOWS=[
  {i:'h04.png',l:'Report',t:'A blank sheet',c:'Away from a visit nothing can be pre-filled: Visit/Loan ID is a search, auto-captured details read WAITING, and Report Issue stays disabled.'},
  {i:'h05.png',l:'Report',t:'Find the visit',c:'Typing OMV0000134 matches visits by ID, each with its customer.'},
  {i:'h06.png',l:'Report',t:'Visit attached',c:'The chosen visit becomes the report’s context.'},
- {i:'h07.png',l:'Report',t:'Category',c:'What kind of problem this is — e-Sign, eKYC and the rest.'},
+ {i:'h07.png',l:'Report',t:'Category',c:'What kind of problem this is — eKYC, e-Sign and the rest.'},
  {i:'h08.png',l:'Report',t:'Describe it',c:'The lead says what is wrong, in their own words.'},
  {i:'h09.png',l:'Report',t:'Evidence',c:'Attachments, still optional.'},
  {i:'h10.png',l:'Report',t:'Reported — PSUP-2361',c:'Filed, and the ticket ID comes straight back.'},
