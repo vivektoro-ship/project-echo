@@ -245,6 +245,27 @@ const FLOWS=[
  {i:'d21.png',l:'Resolved',t:'Resolved',c:'Resolved, with the whole history intact.'},
 ]},
 {k:'home',n:'From home (TL)',t:'A team lead reports from home',s:'The same machinery from the manager side, without a visit open.',screens:[
+ {i:'h01.png',l:'Entry',t:'Visits, sidebar open',c:'The lead starts from the visit list rather than inside one visit.'},
+ {i:'h02.png',l:'Entry',t:'Visits home',c:'Reporting does not require being mid-visit.'},
+ {i:'h03.png',l:'Entry',t:'No reports yet',c:'The honest starting state of the list.'},
+ {i:'h04.png',l:'Report',t:'A blank sheet',c:'Away from a visit nothing can be pre-filled: Visit/Loan ID is a search, auto-captured details read WAITING, and Report Issue stays disabled.'},
+ {i:'h05.png',l:'Report',t:'Find the visit',c:'Typing OMV0000134 matches visits by ID, each with its customer.'},
+ {i:'h06.png',l:'Report',t:'Visit attached',c:'The chosen visit becomes the report’s context.'},
+ {i:'h07.png',l:'Report',t:'Category',c:'What kind of problem this is — e-Sign, eKYC and the rest.'},
+ {i:'h08.png',l:'Report',t:'Describe it',c:'The lead says what is wrong, in their own words.'},
+ {i:'h09.png',l:'Report',t:'Evidence',c:'Attachments, still optional.'},
+ {i:'h10.png',l:'Report',t:'Reported — PSUP-2361',c:'Filed, and the ticket ID comes straight back.'},
+ {i:'h11.png',l:'Thread',t:'The ticket',c:'The lead’s report, with the same window to cancel a mistake.'},
+ {i:'h12.png',l:'Thread',t:'Composer',c:'Adding to the thread from the manager side.'},
+ {i:'h13.png',l:'Thread',t:'Composed',c:'The message ready to post.'},
+ {i:'h14.png',l:'Status',t:'Being looked at',c:'Picked up by support.'},
+ {i:'h15.png',l:'Status',t:'Awaiting reply',c:'Support needs something from the lead.'},
+ {i:'h16.png',l:'Status',t:'Respond',c:'Answering in the thread.'},
+ {i:'h17.png',l:'Status',t:'Sending',c:'On its way.'},
+ {i:'h18.png',l:'Status',t:'Responded',c:'On the record.'},
+ {i:'h19.png',l:'Status',t:'Response sent',c:'Confirmed.'},
+ {i:'h20.png',l:'Resolved',t:'Resolved',c:'Closed out, with the trail kept.'},
+ {i:'h21.png',l:'Drafts',t:'Saved as a draft',c:'An unfinished report waits in the list rather than being lost.'},
 ]},
 {k:'sales',n:'Sales visit',t:'The double-agent path',s:'Reaching reporting through a sales visit.',screens:[
  {i:'sv01.png',l:'Sales',t:'Home — double agent',c:'One person, both hats — sales and partner work in one home.'},
@@ -268,6 +289,10 @@ const FLOWS=[
  {i:'cx03.png',l:'Cancel',t:'Cancelled',c:'Ends as Cancelled and stays visible — withdrawn, not erased.'},
 ]},
 {k:'edges',n:'Edges',t:'Edge cases',s:'The states that decide whether it feels finished.',screens:[
+ {i:'ed01.png',l:'Edge',t:'The sheet, untouched',c:'The contextual report before anything is typed.'},
+ {i:'ed02.png',l:'Edge',t:'Composer, filled',c:'A written reply awaiting send.'},
+ {i:'ed03.png',l:'Edge',t:'Loading the list',c:'A shimmer, so the list never looks empty when it is merely slow.'},
+ {i:'ed04.png',l:'Edge',t:'Sheet variant',c:'A second take on the default sheet.'},
 ]},
 ];
 
