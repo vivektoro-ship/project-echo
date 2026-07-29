@@ -47,13 +47,6 @@ img{max-width:100%}
 .orn .ln{height:1px;background:var(--rule);flex:1}
 .orn .gl{color:var(--amber);font-size:13px}
 
-/* premise strip — three tight lines, not three paragraphs */
-.premise{display:grid;grid-template-columns:1fr;gap:1px;margin:16px 0 0;background:var(--rule);
-  border:1px solid var(--rule);border-radius:12px;overflow:hidden}
-.pcard{background:var(--card);padding:10px 13px;display:flex;align-items:baseline;gap:9px}
-.pcard .h{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);flex:none;width:4.6rem}
-.pcard p{font-size:12.5px;line-height:1.45;color:var(--ink-soft);min-width:0}
-.pcard b{color:var(--ink);font-weight:600}
 
 /* flow section */
 .flows{padding:34px 0 8px}
@@ -174,7 +167,6 @@ footer{text-align:center;padding:44px 0 60px;color:var(--ink-faded);font-family:
 @media(min-width:640px){
   .wrap{padding:0 24px}
   .mast{padding:58px 0 6px}
-  .premise{grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
   .flows{padding:52px 0 8px}
   :root{--devw:272px}
 }
@@ -213,16 +205,11 @@ footer{text-align:center;padding:44px 0 60px;color:var(--ink-faded);font-family:
 <div class="wrap">
   <div class="mast">
     <div class="kicker">Field-staff issue reporting</div>
-    <h1>Report once. The answer <em>echoes</em> back.</h1>
-    <p class="dek">A blocker mid-visit used to mean four WhatsApp groups and no trail. Echo turns it into one tap that files a tracked PSUP ticket — with the visit attached — and closes the loop where the work happens.</p>
+    <h1>Report an issue.<br>Follow it to <em>resolved</em>.</h1>
+    <p class="dek">You face an issue during a visit. Tap the orange flag. The app attaches the visit details and the support team receives it. You follow the status in the app.</p>
     <div class="orn"><span class="ln"></span><span class="gl">✦</span><span class="ln"></span></div>
   </div>
 
-  <div class="premise">
-    <div class="pcard"><div class="h">Trigger</div><p>Orange flag on every visit — <b>one tap</b> from wherever the agent is stuck.</p></div>
-    <div class="pcard"><div class="h">Context</div><p>Visit, failed step and attachments ride along. <b>Nothing retyped.</b></p></div>
-    <div class="pcard"><div class="h">Loop</div><p>Reported → Being looked at → Awaiting reply → <b>Resolved</b>, in the app.</p></div>
-  </div>
 
   <section class="flows" id="flows">
     <div class="phead"><span class="pk">Walkthrough</span><h2>Every flow, screen by screen</h2><span class="pc" id="fc"></span></div>
