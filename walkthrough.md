@@ -1,3 +1,9 @@
+> Node IDs marked `1644:*`, `1646:*` and `1648:*` were the duplicated review
+> sections; those sections have since been deleted from the Figma file. The
+> canonical flows now live under `1:887` (details page) and `1:1932` (home).
+> The respond screens below are rebound to their live IDs; the rest still
+> point at the deleted set and need re-binding if traceability matters.
+
 ## A. Report from details page
 
 Section `1644:21393` — 18 frames, read in ascending x.
@@ -16,8 +22,8 @@ Section `1644:21393` — 18 frames, read in ascending x.
 11. `1644:22005` — Add an attachment with your message if you want, and send
 12. `1644:22153` — Once you send a nudge, wait 5 minutes before you can nudge again
 13. `1644:22224` — If the team asks for more details or proof, tap <b>Respond Issue</b>
-14. `1644:22401` — Write your response in the field and proceed
-15. `1644:22439` — <b>Attach files (optional)</b> — add a file if it helps, then tap <b>Submit</b>
+14. `1:1794` — Write your response in the field and proceed
+15. `12:2642` — <b>Attach files (optional)</b> — add a file if it helps, then tap <b>Submit</b>
 16. `1644:22531` — Once you respond, the team will check your response
 17. `1644:22066` — Status goes back to <b>Being looked at</b> — wait for the team to resolve
 18. `1644:22620` — You will see <b>Issue Resolved</b> when the team resolves the issue
@@ -40,8 +46,8 @@ Section `1644:30833` — 18 frames, read in ascending x.
 11. `1646:34249` — Add an attachment with your message if you want, and send
 12. `1646:34310` — Once you send a nudge, wait 5 minutes before you can nudge again
 13. `1646:34381` — If the team asks for more details or proof, tap <b>Respond Issue</b>
-14. `1646:34540` — Write your response in the field and proceed
-15. `1646:34578` — <b>Attach files (optional)</b> — add a file if it helps, then tap <b>Submit</b>
+14. `1:1794` — Write your response in the field and proceed
+15. `12:2642` — <b>Attach files (optional)</b> — add a file if it helps, then tap <b>Submit</b>
 16. `1646:34670` — Once you respond, the team will check your response
 17. `1646:34453` — Status goes back to <b>Being looked at</b> — wait for the team to resolve
 18. `1646:34759` — You will see <b>Issue Resolved</b> when the team resolves the issue
