@@ -115,17 +115,18 @@ img{max-width:100%}
 .frameflash .sub{font-size:12.5px;color:rgba(255,255,255,.76);margin-top:12px;max-width:20rem;line-height:1.5}
 
 .stephead,.stepbody{min-width:0}
-.fig{display:flex;align-items:center;gap:9px;margin-bottom:9px}
-.fig .num{font-family:var(--display);font-weight:600;font-size:30px;line-height:1;color:var(--orange)}
-.fig .of{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faded)}
-.steplabel{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);
-  background:var(--card);border:1px solid var(--rule);border-radius:99px;padding:5px 11px;margin-left:auto}
+.steplabel{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);
+  background:var(--card);border:1px solid var(--rule);border-radius:99px;padding:4px 10px}
+.count{display:flex;align-items:baseline;justify-content:center;gap:5px;margin-bottom:8px}
+.count b{font-family:var(--display);font-weight:600;font-size:17px;line-height:1;color:var(--orange)}
+.count i{font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faded)}
+.btnrow{display:flex;align-items:center;gap:9px}
 .stephead h4{font-family:var(--display);font-weight:600;font-size:clamp(20px,5.2vw,30px);letter-spacing:-.01em;line-height:1.14;text-wrap:balance;margin-top:4px}
 .stepbody{padding-bottom:0}
 .stepbody p.cap{font-size:14.5px;line-height:1.6;color:var(--ink-soft);max-width:34rem}
 
 /* controls — pinned to the thumb zone on mobile */
-.controls{display:flex;align-items:center;gap:9px;flex-wrap:nowrap;
+.controls{display:block;
   position:sticky;bottom:0;z-index:30;padding:10px 0 calc(10px + env(safe-area-inset-bottom));
   background:linear-gradient(to top,var(--paper) 62%,rgba(253,247,238,0));border-top:1px solid var(--rule-soft)}
 button.nav{appearance:none;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
@@ -164,13 +165,10 @@ footer{text-align:center;padding:44px 0 60px;color:var(--ink-faded);font-family:
   .player.rev{grid-template-columns:1fr minmax(0,330px);grid-template-areas:"head frame" "body frame" "ctrl frame"}
   .framecol{align-self:center}
   :root{--devw:284px}
-  .fig{margin-bottom:11px}
-  .fig .num{font-size:52px}
-  .steplabel{margin-left:0}
-  .fig{flex-wrap:wrap}
+  .count{justify-content:flex-start}
   .controls{position:static;padding:0;margin-top:18px;background:none;border-top:0}
   .framecol{padding-bottom:0}
-  button.nav{flex:0 0 auto;min-width:130px}
+  button.nav{flex:0 0 auto;min-width:132px}
   .topbar .inner{padding:12px 24px}
   .mark{width:30px;height:30px;font-size:17px}
   .topbar .nm{font-size:17px}
@@ -221,53 +219,53 @@ const B='assets/screens/';
 
 /* Each flow: k=key, n=tab name, t=intro title, s=intro sub, screens[{i,l,t,c}] */
 const FLOWS=[
-{k:'visit',n:'From a visit',t:'A blocker, reported from the visit itself',s:'The long flow: an agent hits a failed step mid-visit and follows the ticket all the way to resolved.',screens:[
- {i:'d01.png',l:'Trigger',t:'A visit, in progress',c:'Fresh loan visit OMV00010010 at Federal Bank Chennai, customer a tap away. The orange flag sits in the corner — the agent never has to go looking for support.'},
- {i:'d02.png',l:'Trigger',t:'A step fails',c:'eSign will not go through. This is the moment that used to become a WhatsApp message into a group with no ticket, no owner and no history.'},
- {i:'d03.png',l:'Report',t:'Say what happened',c:'Visit ID, category (eKYC) and city come pre-filled; the agent types only the problem — “eSign has been stuck for 10 mins please check and resolve”.'},
- {i:'d04.png',l:'Report',t:'Attach the evidence',c:'Attach files is optional, and offers camera, gallery or a document — a screenshot beats a description.'},
- {i:'d05.png',l:'Report',t:'Evidence attached',c:'The attachment lands on the report and can be reviewed before anything is filed.'},
- {i:'d06.png',l:'Report',t:'Check before sending',c:'The attachment opens full-size so the agent can confirm it actually shows the failure.'},
- {i:'d07.png',l:'Report',t:'More than one',c:'Several attachments can ride along — the whole state of the failure, not one frame of it.'},
- {i:'d08.png',l:'Report',t:'Filing',c:'Submitting. One tap, and it becomes a tracked ticket rather than a message.'},
- {i:'d09.png',l:'Report',t:'Filed',c:'Confirmation the report is in. The agent can get back to the customer instead of chasing anyone.'},
- {i:'d10.png',l:'Thread',t:'Reported — PSUP-2361',c:'Now a ticket with an ID and an orange Reported chip. “We’ve received your report and will look into it”, with a cooldown window where the agent can still cancel a mistake.'},
- {i:'d11.png',l:'Thread',t:'The thread',c:'Everything about this issue in one place — what was said, what was attached, when.'},
- {i:'d12.png',l:'Thread',t:'The record, in full',c:'The reported message with its attachments stays readable for as long as the ticket lives.'},
- {i:'d13.png',l:'Thread',t:'Add to the thread',c:'New information mid-issue goes on the same ticket — the composer keeps the conversation attached to the work.'},
- {i:'d14.png',l:'Status',t:'Being looked at',c:'Someone has picked it up, and the chip turns blue in the agent’s hand — no need to ask whether anyone saw it.'},
- {i:'d15.png',l:'Status',t:'Awaiting your reply',c:'Support needs something back. The ball is visibly in the agent’s court.'},
- {i:'d16.png',l:'Status',t:'Respond',c:'The agent answers from the same screen the question arrived on.'},
- {i:'d17.png',l:'Status',t:'Response written',c:'The reply, ready to send back into the thread.'},
- {i:'d18.png',l:'Status',t:'Sending',c:'The response is on its way.'},
- {i:'d19.png',l:'Status',t:'Responded',c:'The agent’s answer is on the record and the ticket moves on.'},
- {i:'d20.png',l:'Status',t:'Response sent',c:'Confirmation, then back to waiting on support rather than wondering.'},
- {i:'d21.png',l:'Resolved',t:'Resolved',c:'The loop closes where it opened — in the app, on the visit, with the whole history intact.'},
+{k:'visit',n:'From a visit',t:'A blocker, reported from the visit itself',s:'An agent hits a failed step mid-visit and follows the ticket to resolved.',screens:[
+ {i:'d01.png',l:'Trigger',t:'A visit, in progress',c:'Fresh loan visit OMV00010010 at Federal Bank Chennai — the orange flag waits in the corner.'},
+ {i:'d02.png',l:'Trigger',t:'A step fails',c:'eSign will not go through. The blocker that used to become a WhatsApp message.'},
+ {i:'d03.png',l:'Report',t:'Say what happened',c:'Visit ID, category and city arrive pre-filled; the agent types only what went wrong.'},
+ {i:'d04.png',l:'Report',t:'Attach the evidence',c:'Attaching is optional — the error screenshot, code and app version are captured for you.'},
+ {i:'d05.png',l:'Report',t:'Evidence attached',c:'The attachment lands on the report, reviewable before anything is filed.'},
+ {i:'d06.png',l:'Report',t:'Check before sending',c:'Full-size check that the evidence actually shows the failure.'},
+ {i:'d07.png',l:'Report',t:'More than one',c:'Several attachments can ride along, not just one frame of the problem.'},
+ {i:'d08.png',l:'Report',t:'Filing',c:'Submitting — one tap turns it into a tracked ticket.'},
+ {i:'d09.png',l:'Report',t:'Filed',c:'Filed. Back to the customer instead of chasing anyone.'},
+ {i:'d10.png',l:'Thread',t:'Reported — PSUP-2361',c:'Now PSUP-2361 with an orange Reported chip, and a window to cancel a mistake.'},
+ {i:'d11.png',l:'Thread',t:'The thread',c:'The thread: what was said, what was attached, when.'},
+ {i:'d12.png',l:'Thread',t:'The record, in full',c:'The reported message and its evidence stay readable for the life of the ticket.'},
+ {i:'d13.png',l:'Thread',t:'Add to the thread',c:'New information goes on the same ticket, not a new channel.'},
+ {i:'d14.png',l:'Status',t:'Being looked at',c:'Picked up. The chip turns blue in the agent’s hand.'},
+ {i:'d15.png',l:'Status',t:'Awaiting your reply',c:'Support needs something back — the ball is visibly in the agent’s court.'},
+ {i:'d16.png',l:'Status',t:'Respond',c:'The agent answers on the screen the question arrived on.'},
+ {i:'d17.png',l:'Status',t:'Response written',c:'The reply, ready to send.'},
+ {i:'d18.png',l:'Status',t:'Sending',c:'Sending.'},
+ {i:'d19.png',l:'Status',t:'Responded',c:'Responded, and on the record.'},
+ {i:'d20.png',l:'Status',t:'Response sent',c:'Confirmed — back to waiting on support rather than wondering.'},
+ {i:'d21.png',l:'Resolved',t:'Resolved',c:'Resolved, with the whole history intact.'},
 ]},
-{k:'home',n:'From home (TL)',t:'A team lead reports from home',s:'The same machinery from the manager side: raise an issue without a visit open, then run the ticket to resolution.',screens:[
+{k:'home',n:'From home (TL)',t:'A team lead reports from home',s:'The same machinery from the manager side, without a visit open.',screens:[
 ]},
-{k:'sales',n:'Sales visit',t:'The double-agent path',s:'A user with both sales and partner access reaches reporting through a sales visit.',screens:[
- {i:'sv01.png',l:'Sales',t:'Home — double agent',c:'One person, both hats. Home reflects the wider access a double agent has across sales and partner work.'},
- {i:'sv02.png',l:'Sales',t:'All visits',c:'The full visit listing to pick from before anything is started.'},
- {i:'sv03.png',l:'Sales',t:'Visit not started',c:'A visit yet to begin — reporting is available before work starts, not only once the agent is stuck mid-flow.'},
+{k:'sales',n:'Sales visit',t:'The double-agent path',s:'Reaching reporting through a sales visit.',screens:[
+ {i:'sv01.png',l:'Sales',t:'Home — double agent',c:'One person, both hats — sales and partner work in one home.'},
+ {i:'sv02.png',l:'Sales',t:'All visits',c:'The full visit list to pick from.'},
+ {i:'sv03.png',l:'Sales',t:'Visit not started',c:'Reporting is there before a visit even starts.'},
 ]},
-{k:'list',n:'Reports list',t:'Every report, and how you find one',s:'Reported Issues is the home of the tickets — filtered by status, scoped to a visit, narrowed by who raised it, or searched.',screens:[
- {i:'lp01.png',l:'Entry',t:'Visits home',c:'The starting point in Oro Px — reporting and the reports list are reachable without being mid-visit.'},
- {i:'lm01.png',l:'List',t:'Reported Issues',c:'Every ticket, grouped by day. A saved Issue Draft sits at the top with Edit Draft and last-saved time; below it PSUP-2361 entries carry their category (E-SIGN ISSUE), age and status — orange Reported, blue Being looked at, green Resolved. The + button raises a new one.'},
- {i:'rv01.png',l:'List',t:'In progress',c:'The same list narrowed to what is still open — the lead’s working queue.'},
- {i:'rv02.png',l:'List',t:'Resolved',c:'Closed tickets, kept for the record rather than cleared away.'},
- {i:'lp02.png',l:'List',t:'A partner’s own reports',c:'Scoped to what this partner raised, so a field user sees their own trail and nothing else.'},
- {i:'lm02.png',l:'Scoped',t:'Visit Issues',c:'Every report against one visit — OMV00010010 with two PSUP-2361 tickets Being looked at, each stamped with who raised it (Arun Prakash) and when. One visit can carry several issues without them blurring together.'},
- {i:'fl02.png',l:'Filter',t:'Raised by',c:'The question a lead actually asks of a shared queue — You, Partner 1, Partner 2 — answered with one chip.'},
- {i:'se02.png',l:'Search',t:'Recent searches',c:'Recents, so a repeated lookup is one tap rather than retyping a ticket ID.'},
- {i:'se03.png',l:'Search',t:'No results',c:'The empty result, handled deliberately instead of left blank.'},
+{k:'list',n:'Reports list',t:'Every report, and how you find one',s:'Where the tickets live — by status, by visit, by who raised them, by search.',screens:[
+ {i:'lp01.png',l:'Entry',t:'Visits home',c:'Reporting starts here — no need to be mid-visit.'},
+ {i:'lm01.png',l:'List',t:'Reported Issues',c:'Every ticket by day, with a saved draft on top and Reported / Being looked at / Resolved chips.'},
+ {i:'rv01.png',l:'List',t:'In progress',c:'The same list narrowed to what is still open.'},
+ {i:'rv02.png',l:'List',t:'Resolved',c:'Closed tickets, kept rather than cleared.'},
+ {i:'lp02.png',l:'List',t:'A partner’s own reports',c:'Scoped to what this partner raised.'},
+ {i:'lm02.png',l:'Scoped',t:'Visit Issues',c:'One visit’s issues, each stamped with who raised it and when.'},
+ {i:'fl02.png',l:'Filter',t:'Raised by',c:'Narrow a shared queue to one person in a tap.'},
+ {i:'se02.png',l:'Search',t:'Recent searches',c:'Recents, so a repeat lookup is one tap.'},
+ {i:'se03.png',l:'Search',t:'No results',c:'The empty result, handled deliberately.'},
 ]},
 {k:'cancel',n:'Cancel',t:'Cancelling a report',s:'The escape hatch, and what it leaves behind.',screens:[
- {i:'cx01.png',l:'Cancel',t:'An open ticket',c:'A report already being looked at, with cancel still offered.'},
- {i:'cx02.png',l:'Cancel',t:'Confirm the cancel',c:'Cancelling is deliberate — it is confirmed, not a stray tap.'},
- {i:'cx03.png',l:'Cancel',t:'Cancelled',c:'The ticket ends as Cancelled and stays visible. Withdrawn, not erased.'},
+ {i:'cx01.png',l:'Cancel',t:'An open ticket',c:'A report already being looked at, cancel still offered.'},
+ {i:'cx02.png',l:'Cancel',t:'Confirm the cancel',c:'Cancelling is confirmed, not a stray tap.'},
+ {i:'cx03.png',l:'Cancel',t:'Cancelled',c:'Ends as Cancelled and stays visible — withdrawn, not erased.'},
 ]},
-{k:'edges',n:'Edges',t:'Edge cases',s:'The states that decide whether the feature feels finished.',screens:[
+{k:'edges',n:'Edges',t:'Edge cases',s:'The states that decide whether it feels finished.',screens:[
 ]},
 ];
 
@@ -283,13 +281,13 @@ tabsEl.innerHTML=FLOWS.map((f,i)=>
   `<button class="flowtab" data-f="${i}"><b>${String(i+1).padStart(2,'0')}</b>${f.n}</button>`).join('');
 
 playerEl.innerHTML=
-  `<div class="stephead"><div class="fig"><span class="num" id="pnum"></span><span class="of" id="pof"></span>`+
-  `<span class="steplabel" id="plab"></span></div><h4 id="ptit"></h4></div>`+
+  `<div class="stephead"><span class="steplabel" id="plab"></span><h4 id="ptit"></h4></div>`+
   `<div class="framecol"><div class="phone"><div class="notch"></div><div class="screen">`+
   `<img id="pimg" alt=""><div class="frameflash" id="pflash"><span class="k">Next up</span><h5></h5><p class="sub"></p></div>`+
   `</div></div></div>`+
   `<div class="stepbody"><p class="cap" id="pcap"></p></div>`+
-  `<div class="controls"><button class="nav" id="pprev">← Prev</button><button class="nav primary" id="pnext">Next →</button></div>`;
+  `<div class="controls"><div class="count"><b id="pnum"></b><i id="pof"></i></div>`+
+  `<div class="btnrow"><button class="nav" id="pprev">← Prev</button><button class="nav primary" id="pnext">Next →</button></div></div>`;
 
 const q=s=>document.querySelector(s);
 const img=q('#pimg'),num=q('#pnum'),of=q('#pof'),lab=q('#plab'),tit=q('#ptit'),cap=q('#pcap'),
@@ -307,7 +305,7 @@ function render(){
   img.src=B+d.i; img.alt=d.t;
   const fit=()=>{ if(img.naturalWidth&&img.naturalHeight) scr.style.aspectRatio=img.naturalWidth+'/'+img.naturalHeight; };
   if(img.complete) fit(); else img.onload=fit;
-  num.textContent=idx+1; of.textContent='/ '+f.screens.length;
+  num.textContent=String(idx+1).padStart(2,'0'); of.textContent='of '+f.screens.length;
   lab.textContent=d.l; tit.textContent=d.t; cap.textContent=d.c||'';
   prev.disabled=idx===0; next.disabled=idx===f.screens.length-1;
   if(scr) scr.scrollTop=0;
