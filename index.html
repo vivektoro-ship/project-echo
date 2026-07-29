@@ -143,6 +143,29 @@ button.nav.primary:hover{background:var(--orange-deep);border-color:var(--orange
 .dot.active{background:var(--orange);border-color:var(--orange);color:#fff}
 .dot.done{color:var(--ink-soft)}
 
+/* ============ partner guide (plain-language Q&A) ============ */
+.guide{padding:38px 0 8px;border-top:1px solid var(--rule);margin-top:34px}
+.qa{margin-top:22px}
+.qa h3{font-family:var(--display);font-weight:600;font-size:clamp(19px,5vw,26px);letter-spacing:-.01em;
+  margin:30px 0 2px;padding-bottom:9px;border-bottom:1px solid var(--rule)}
+.qa h3:first-child{margin-top:0}
+.qa .item{padding:15px 0;border-bottom:1px solid var(--rule-soft)}
+.qa .item:last-of-type{border-bottom:0}
+.qa .q{font-family:var(--body);font-weight:700;font-size:15.5px;line-height:1.45;color:var(--ink)}
+.qa .a{font-size:15.5px;line-height:1.65;color:var(--ink-soft);margin-top:6px}
+.qa .a b,.qa .q b{font-weight:700;color:var(--orange-deep)}
+.qa ul{list-style:none;margin-top:8px;display:flex;flex-direction:column;gap:9px}
+.qa ul li{font-size:15.5px;line-height:1.6;color:var(--ink-soft);padding-left:15px;position:relative}
+.qa ul li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--amber)}
+.qa ul li b{font-weight:700;color:var(--ink)}
+.remember{background:var(--card);border:1px solid var(--rule);border-radius:13px;padding:16px 18px;margin-top:14px}
+.remember ul li b{color:var(--orange-deep)}
+@media(min-width:640px){
+  .guide{padding:52px 0 8px}
+  .qa{max-width:46rem}
+  .qa .q,.qa .a,.qa ul li{font-size:16px}
+}
+
 footer{text-align:center;padding:44px 0 60px;color:var(--ink-faded);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;line-height:1.9}
 
   background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.3);border-radius:7px;padding:10px 13px;cursor:pointer;min-height:40px}
@@ -207,6 +230,59 @@ footer{text-align:center;padding:44px 0 60px;color:var(--ink-faded);font-family:
     <div class="pbar"><i id="prog"></i></div>
     <div class="dots" id="dots"></div>
     <div class="player" id="player"></div>
+  </section>
+
+  <section class="guide" id="guide">
+    <div class="phead"><span class="pk">For partners</span><h2>Echo — partner guide</h2><span class="pc">Plain language</span></div>
+    <div class="qa">
+
+      <h3>Reporting an issue</h3>
+      <div class="item"><p class="q">You face an issue during a visit. What do you do?</p><p class="a">Tap the orange flag at the bottom of the screen.</p></div>
+      <div class="item"><p class="q">Do you have to type the visit details?</p><p class="a">No. The app attaches them. You only describe the issue.</p></div>
+      <div class="item"><p class="q">You are not inside a visit. Can you still report?</p><p class="a">Yes. Open <b>My Reports</b> and tap <b>Report an issue</b>. Then search the visit ID.</p></div>
+      <div class="item"><p class="q">What do you fill in?</p><p class="a">Select the issue type. Describe what happened. Attach a photo if it helps. Tap <b>Submit</b>.</p></div>
+      <div class="item"><p class="q">It says this visit is already reported. Why?</p><p class="a">Another partner has already reported this visit. Tap <b>View report</b>. Do not submit again.</p></div>
+      <div class="item"><p class="q">Can you complete it later?</p><p class="a">Yes. It is saved as a <b>Draft</b> in <b>My Reports</b>.</p></div>
+
+      <h3>After you submit</h3>
+      <div class="item"><p class="q">What happens next?</p><p class="a">The support team receives it with all your details. You get a report number.</p></div>
+      <div class="item"><p class="q">Where do you see your reports?</p><p class="a">In <b>My Reports</b>. All your reports are listed there.</p></div>
+      <div class="item"><p class="q">What does each status mean?</p>
+        <ul>
+          <li><b>Reported</b> — the support team has received it.</li>
+          <li><b>Being looked at</b> — the support team is working on it.</li>
+          <li><b>Awaiting your reply</b> — the support team needs one detail from you.</li>
+          <li><b>Resolved</b> — the issue is closed and fixed.</li>
+          <li><b>Cancelled</b> — the report was closed. The reason is shown inside.</li>
+        </ul>
+      </div>
+      <div class="item"><p class="q">Will you see who is handling it?</p><p class="a">No. You will see only the status.</p></div>
+
+      <h3>If it is taking time</h3>
+      <div class="item"><p class="q">Can you follow up?</p><p class="a">Yes. Open the report and tap <b>Nudge</b>.</p></div>
+      <div class="item"><p class="q">Why is Nudge unavailable?</p><p class="a">You have used it recently. It becomes available again after a short wait.</p></div>
+      <div class="item"><p class="q">The status says Awaiting your reply. What do you do?</p><p class="a">Open the report. Read the question. Type your answer. Tap <b>Send reply</b>.</p></div>
+      <div class="item"><p class="q">Can you keep replying after that?</p><p class="a">No. It is one question and one reply. Give a complete answer.</p></div>
+
+      <h3>Closing</h3>
+      <div class="item"><p class="q">How do you know it is done?</p><p class="a">The status changes to <b>Resolved</b>. The details of the fix are shown inside.</p></div>
+      <div class="item"><p class="q">Do you close the report?</p><p class="a">No. The support team closes it.</p></div>
+
+      <h3>For partner leads</h3>
+      <div class="item"><p class="q">How do you see your team's issues?</p><p class="a">Open the same list. Use the tabs — <b>In progress</b>, <b>Resolved</b>, <b>All</b>.</p></div>
+      <div class="item"><p class="q">Can you narrow the list?</p><p class="a">Yes. Filter by city, or search by visit ID or partner name.</p></div>
+
+      <h3>Points to remember</h3>
+      <div class="remember">
+        <ul>
+          <li>One issue, one report.</li>
+          <li>Describe what happened, not the cause.</li>
+          <li>A photo helps the support team resolve it faster.</li>
+          <li>Check <b>My Reports</b> first. No need to call.</li>
+        </ul>
+      </div>
+
+    </div>
   </section>
 </div>
 
