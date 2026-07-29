@@ -91,6 +91,25 @@ img{max-width:100%}
   aspect-ratio:375/925;height:auto}
 .phone .screen img{display:block;width:100%;height:100%;object-fit:contain;object-position:top center;background:#fff;cursor:pointer}
 
+/* animated tap hint — flow 1 only.
+   b = steady ring with a breathing glow; i = expanding tap ripples (tap targets only).
+   data-kind: tap = something to press, look = something to notice.
+   data-shape: dot = small near-square target, drawn as a circle. */
+.hint{position:absolute;display:none;z-index:6;pointer-events:none}
+.hint b,.hint i{position:absolute;inset:0;border:2px solid var(--orange);border-radius:11px;animation:none}
+.hint[data-shape="dot"] b,.hint[data-shape="dot"] i{border-radius:50%}
+.hint b{box-shadow:0 0 13px rgba(224,123,0,.5),inset 0 0 13px rgba(224,123,0,.13)}
+.hint i{opacity:0}
+.hint.go b{animation:hintGlow 1.9s ease-in-out infinite}
+.hint.go i{animation:hintRipple 1.9s cubic-bezier(.2,.72,.3,1) infinite}
+.hint.go i:nth-of-type(2){animation-delay:.95s}
+.hint[data-kind="look"] i{display:none}
+.hint[data-kind="look"] b{border-style:dashed;border-width:2px}
+@keyframes hintGlow{0%,100%{box-shadow:0 0 6px rgba(224,123,0,.34),inset 0 0 8px rgba(224,123,0,.08);opacity:.82}
+  50%{box-shadow:0 0 20px rgba(224,123,0,.62),inset 0 0 18px rgba(224,123,0,.2);opacity:1}}
+@keyframes hintRipple{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(1.42)}}
+@media (prefers-reduced-motion:reduce){.hint.go b,.hint.go i{animation:none}.hint i{display:none}}
+
 /* helper highlight + intro card */
 .hl{position:absolute;display:none;z-index:5;border:2.5px solid #e02b1b;border-radius:7px;
   box-shadow:0 0 0 3px rgba(224,43,27,.16);pointer-events:none;animation:hlin .35s ease}
@@ -214,24 +233,24 @@ const B='assets/screens/';
 const FLOWS=[
 {k:'visit',n:'Report from details page',screens:[
  {i:'',t:'Report an issue',h:null},
- {i:'s01.png',t:'Visit details page — tap the orange <b>flag</b> to report an issue',h:[78,72,15,7]},
- {i:'s02.png',t:'The app fills Visit ID, category, city, description, the screenshot and the <b>Auto-captured details</b> for you',h:null},
- {i:'s03.png',t:'Describe the issue in simple lines, in the description field',h:null},
- {i:'s04.png',t:'Attachment sheet — choose how you want to attach files',h:null},
- {i:'s05.png',t:'Attached Files — check the files and tap <b>Done</b>',h:null},
- {i:'s06.png',t:'Once all details are added, tap <b>Report Issue</b>',h:null},
- {i:'s07.png',t:'Reporting your issue to the tech team',h:null},
- {i:'s08.png',t:'Issue reported — a PSUP ticket is also created',h:null},
- {i:'s09.png',t:'Status is <b>Reported</b> — wait for the team to pick it up',h:null},
- {i:'s10.png',t:'<b>Ask for an update</b> — choose a quick update message and modify it if you want',h:null},
- {i:'s11.png',t:'Add an attachment with your message if you want, and send',h:null},
- {i:'s12.png',t:'Once you send a nudge, wait 5 minutes before you can nudge again',h:null},
- {i:'s13.png',t:'If the team asks for more details or proof, tap <b>Respond Issue</b>',h:null},
- {i:'s14.png',t:'Write your response in the field and proceed',h:null},
- {i:'s15.png',t:'<b>Attach files (optional)</b> — add a file if it helps, then tap <b>Submit</b>',h:null},
- {i:'s17.png',t:'Once you respond, the team will check your response',h:null},
- {i:'s18.png',t:'Status goes back to <b>Being looked at</b> — wait for the team to resolve',h:null},
- {i:'s19.png',t:'You will see <b>Issue Resolved</b> when the team resolves the issue',h:null},
+ {i:'s01.png',t:'Visit details page — tap the orange <b>flag</b> to report an issue',h:null,a:[78.7,73.2,14.9,6.6,"t"]},
+ {i:'s02.png',t:'The app fills Visit ID, category, city, description, the screenshot and the <b>Auto-captured details</b> for you',h:null,a:[5,18,90,67,"l"]},
+ {i:'s03.png',t:'Describe the issue in simple lines, in the description field',h:null,a:[7,47.5,86,10,"t"]},
+ {i:'s04.png',t:'Attachment sheet — choose how you want to attach files',h:null,a:[7,75,80,17,"t"]},
+ {i:'s05.png',t:'Attached Files — check the files and tap <b>Done</b>',h:null,a:[74.5,6.6,22,6,"t"]},
+ {i:'s06.png',t:'Once all details are added, tap <b>Report Issue</b>',h:null,a:[5.3,85.4,89.3,6.7,"t"]},
+ {i:'s07.png',t:'Reporting your issue to the tech team',h:null,a:[5.3,85.4,89.3,6.7,"l"]},
+ {i:'s08.png',t:'Issue reported — a PSUP ticket is also created',h:null,a:[16,66,68,21,"l"]},
+ {i:'s09.png',t:'Status is <b>Reported</b> — wait for the team to pick it up',h:null,a:[3,87.2,79,5,"t"]},
+ {i:'s10.png',t:'<b>Ask for an update</b> — choose a quick update message and modify it if you want',h:null,a:[6,50.5,84,34,"t"]},
+ {i:'s11.png',t:'Add an attachment with your message if you want, and send',h:null,a:[83.5,87.2,11.5,5,"t"]},
+ {i:'s12.png',t:'Once you send a nudge, wait 5 minutes before you can nudge again',h:null,a:[8,89.5,74,4.5,"l"]},
+ {i:'s13.png',t:'If the team asks for more details or proof, tap <b>Respond Issue</b>',h:null,a:[4.3,85.5,91.5,6.6,"t"]},
+ {i:'s14.png',t:'Write your response in the field and proceed',h:null,a:[4.5,35,90,21,"t"]},
+ {i:'s15.png',t:'<b>Attach files (optional)</b> — add a file if it helps, then tap <b>Submit</b>',h:null,a:[5.3,85.5,89.3,6.6,"t"]},
+ {i:'s17.png',t:'Once you respond, the team will check your response',h:null,a:[25,62,50,17,"l"]},
+ {i:'s18.png',t:'Status goes back to <b>Being looked at</b> — wait for the team to resolve',h:null,a:[64,7.5,31,4.5,"l"]},
+ {i:'s19.png',t:'You will see <b>Issue Resolved</b> when the team resolves the issue',h:null,a:[24,31,52,13,"l"]},
 ]},
 {k:'home',n:'Report from Home screen',screens:[
  {i:'',t:'Report from the Home screen',h:null},
@@ -292,14 +311,14 @@ tabsEl.innerHTML=FLOWS.map((f,i)=>
 playerEl.innerHTML=
   `<div class="stephead"><h4 id="ptit"></h4></div>`+
   `<div class="framecol"><div class="phone"><div class="notch"></div><div class="screen">`+
-  `<img id="pimg" alt=""><div class="hl" id="phl"></div><div class="intro" id="pintro"></div>`+
+  `<img id="pimg" alt=""><div class="hl" id="phl"></div><div class="hint" id="phint"><b></b><i></i><i></i></div><div class="intro" id="pintro"></div>`+
   `</div></div></div>`+
 
   `<div class="controls"><div class="count"><b id="pnum"></b><i id="pof"></i></div>`+
   `<div class="btnrow"><button class="nav" id="pprev">← Prev</button><button class="nav primary" id="pnext">Next →</button></div></div>`;
 
 const q=s=>document.querySelector(s);
-const img=q('#pimg'),num=q('#pnum'),of=q('#pof'),tit=q('#ptit'),hl=q('#phl'),intro=q('#pintro'),
+const img=q('#pimg'),num=q('#pnum'),of=q('#pof'),tit=q('#ptit'),hl=q('#phl'),hint=q('#phint'),intro=q('#pintro'),
       prev=q('#pprev'),next=q('#pnext'),scr=q('.screen');
 
 function flow(){return FLOWS[flowIdx];}
@@ -319,6 +338,16 @@ function render(){
   if(d.h && !isIntro){ hl.style.display='block'; hl.style.left=d.h[0]+'%'; hl.style.top=d.h[1]+'%';
                        hl.style.width=d.h[2]+'%'; hl.style.height=d.h[3]+'%'; }
   else hl.style.display='none';
+  /* animated hint: a=[left%,top%,w%,h%,kind] where kind 'l' = look at, else tap */
+  if(d.a && !isIntro){
+    const [ax,ay,aw,ah,ak]=d.a;
+    hint.style.display='block';
+    hint.style.left=ax+'%'; hint.style.top=ay+'%'; hint.style.width=aw+'%'; hint.style.height=ah+'%';
+    hint.dataset.kind=ak==='l'?'look':'tap';
+    const pw=aw*3.75, ph=ah*8.35;                       /* back to 375x835 px */
+    hint.dataset.shape=(ak!=='l'&&pw<72&&ph<72&&Math.abs(pw-ph)<18)?'dot':'box';
+    hint.classList.remove('go'); void hint.offsetWidth; hint.classList.add('go');
+  } else { hint.style.display='none'; hint.classList.remove('go'); }
   const fit=()=>{ if(img.naturalWidth&&img.naturalHeight) scr.style.aspectRatio=img.naturalWidth+'/'+img.naturalHeight; };
   if(!isIntro){ if(img.complete) fit(); else img.onload=fit; } else scr.style.aspectRatio='375/835';
   const atEnd=idx===f.screens.length-1, atStart=idx===0;
