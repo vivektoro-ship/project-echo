@@ -157,10 +157,16 @@ footer{text-align:center;padding:44px 0 60px;color:var(--ink-faded);font-family:
 }
 /* ============ desktop: phone beside the text, controls back in flow ============ */
 @media(min-width:960px){
-  .player{grid-template-columns:minmax(0,330px) 1fr;gap:clamp(28px,4.5vw,54px);margin-top:30px;align-items:start;
-    grid-template-areas:"frame head" "frame body" "frame ctrl"}
-  .player.rev{grid-template-columns:1fr minmax(0,330px);grid-template-areas:"head frame" "body frame" "ctrl frame"}
-  .framecol{align-self:center}
+  /* the phone spans the text rows, so a trailing 1fr row soaks up the leftover
+     height — otherwise it is shared out between title, caption and controls */
+  .player{grid-template-columns:minmax(0,300px) 1fr;gap:clamp(26px,4vw,48px);margin-top:26px;align-items:start;
+    grid-template-areas:"frame head" "frame body" "frame ctrl" "frame pad";
+    grid-template-rows:max-content max-content max-content 1fr}
+  .player.rev{grid-template-columns:1fr minmax(0,300px);
+    grid-template-areas:"head frame" "body frame" "ctrl frame" "pad frame"}
+  .stephead{margin-top:-4px}
+  .stepbody p.cap{margin-top:10px}
+  .framecol{align-self:start}
   :root{--devw:284px}
   .count{justify-content:flex-start}
   .controls{position:static;padding:0;margin-top:18px;background:none;border-top:0}
