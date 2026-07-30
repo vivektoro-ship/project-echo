@@ -20,7 +20,7 @@ Section `1644:21393` — 18 frames, read in ascending x.
 9. `1644:21954` — Status is <b>Reported</b> — wait for the team to pick it up
 10. `1644:21843` — <b>Ask for an update</b> — choose a quick update message and modify it if you want
 11. `1644:22005` — Add an attachment with your message if you want, and send
-12. `1644:22153` — Once you send a nudge, wait 5 minutes before you can nudge again
+12. `1644:22153` — Once you send a nudge, wait 5 minutes before you nudge again
 13. `1644:22224` — If the team asks for more details or proof, tap <b>Respond Issue</b>
 14. `1:1794` — Write your response in the field and proceed
 15. `12:2642` — <b>Attach files (optional)</b> — add a file if it helps, then tap <b>Submit</b>
@@ -44,7 +44,7 @@ Section `1644:30833` — 18 frames, read in ascending x.
 9. `1646:34087` — Status is <b>Reported</b> — wait for the team to pick it up
 10. `1646:34138` — <b>Ask for an update</b> — choose a quick update message and modify it if you want
 11. `1646:34249` — Add an attachment with your message if you want, and send
-12. `1646:34310` — Once you send a nudge, wait 5 minutes before you can nudge again
+12. `1646:34310` — Once you send a nudge, wait 5 minutes before you nudge again
 13. `1646:34381` — If the team asks for more details or proof, tap <b>Respond Issue</b>
 14. `1:1794` — Write your response in the field and proceed
 15. `12:2642` — <b>Attach files (optional)</b> — add a file if it helps, then tap <b>Submit</b>
