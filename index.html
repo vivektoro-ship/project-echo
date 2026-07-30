@@ -17,7 +17,7 @@
   --orange:#e07b00; --orange-deep:#a85200; --amber:#f0a824; --amber-bright:#ffc65c;
   --display:"Fraunces",Georgia,serif; --body:"Manrope",-apple-system,BlinkMacSystemFont,sans-serif;
   --mono:ui-monospace,"SF Mono",Menlo,monospace;
-  /* device width — the only knob for viewer size; height follows at 375:925 */
+  /* device width — the only knob for viewer size; height follows the image */
   --devw:258px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -86,10 +86,10 @@ img{max-width:100%}
 /* The viewer takes each screenshot's own aspect ratio (set from the image's
    natural size as it loads), so every screen fills the frame exactly — no
    white down the side, none at the bottom. Frames run 832-925px tall, so the
-   device height varies by about 11% across the set. 375:925 is the pre-load
-   fallback. */
+   device height varies by about 11% across the set. 375:835 is the pre-load
+   fallback, matching each flow's first screen. */
 .phone .screen{position:relative;border-radius:25px;overflow:hidden;background:#fff;border:1px solid var(--rule-soft);
-  aspect-ratio:375/925;height:auto}
+  aspect-ratio:375/835;height:auto}
 .phone .screen img{display:block;width:100%;height:100%;object-fit:contain;object-position:top center;background:#fff;cursor:pointer}
 
 /* animated tap hint.
@@ -117,17 +117,7 @@ img{max-width:100%}
   background:linear-gradient(160deg,var(--orange),var(--orange-deep));color:#fff}
 .intro span{font-family:var(--display);font-weight:600;font-size:clamp(24px,7vw,34px);line-height:1.1;letter-spacing:-.01em}
 
-/* section-intro flash */
-.frameflash{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:26px;
-  background:linear-gradient(160deg,var(--orange),var(--orange-deep));color:#fff;opacity:0;visibility:hidden;pointer-events:none;
-  transition:opacity .5s ease,visibility .5s ease}
-.frameflash.show{opacity:1;visibility:visible}
-.frameflash .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--amber-bright);margin-bottom:12px}
-.frameflash h5{font-family:var(--display);font-weight:600;font-size:clamp(21px,5.6vw,28px);line-height:1.1;letter-spacing:-.01em;text-wrap:balance}
-.frameflash .sub{font-size:12.5px;color:rgba(255,255,255,.76);margin-top:12px;max-width:20rem;line-height:1.5}
-
 .stephead,.stepbody{min-width:0}
-  background:var(--card);border:1px solid var(--rule);border-radius:99px;padding:4px 10px}
 .count{display:flex;align-items:baseline;justify-content:center;gap:5px;margin-bottom:8px}
 .count b{font-family:var(--display);font-weight:600;font-size:17px;line-height:1;color:var(--orange)}
 .count i{font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faded)}
@@ -159,8 +149,6 @@ button.nav.primary:hover{background:var(--orange-deep);border-color:var(--orange
 .dot.done{color:var(--ink-soft)}
 
 footer{text-align:center;padding:44px 0 60px;color:var(--ink-faded);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;line-height:1.9}
-
-  background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.3);border-radius:7px;padding:10px 13px;cursor:pointer;min-height:40px}
 
 /* ============ tablet ============ */
 @media(min-width:640px){
@@ -302,7 +290,6 @@ const tabsEl=document.getElementById('flowtabs'),
       progEl=document.getElementById('prog');
 
 let flowIdx=0, idx=0, prevIdx=-1;
-const total=FLOWS.reduce((n,f)=>n+f.screens.length,0);
 
 tabsEl.innerHTML=FLOWS.map((f,i)=>
   `<button class="flowtab" data-f="${i}"><b>${String(i+1).padStart(2,'0')}</b>${f.n}</button>`).join('');
@@ -334,6 +321,7 @@ function render(){
   img.style.display=isIntro?'none':'';
   if(!isIntro){ img.src=B+d.i; img.alt=d.t.replace(/<[^>]+>/g,''); }
   tit.innerHTML=d.t;
+  num.textContent=idx+1; of.textContent='of '+f.screens.length;
   /* animated hint: a=[left%,top%,w%,h%,kind] where kind 'l' = look at, else tap */
   if(d.a && !isIntro){
     const [ax,ay,aw,ah,ak]=d.a;
@@ -386,12 +374,12 @@ scr.addEventListener('touchend',e=>{
 function probe(src){return new Promise(r=>{const im=new Image();im.onload=()=>r(true);im.onerror=()=>r(false);im.src=src;});}
 (async()=>{
   const keep=await Promise.all(FLOWS.map(async f=>{
-    const ok=await Promise.all(f.screens.map(s=>probe(B+s.i)));
+    /* intro cards have no image (i:'') — always keep them */
+    const ok=await Promise.all(f.screens.map(s=>s.i?probe(B+s.i):Promise.resolve(true)));
     f.screens=f.screens.filter((_,i)=>ok[i]);
     return f.screens.length>0;
   }));
   for(let i=FLOWS.length-1;i>=0;i--) if(!keep[i]) FLOWS.splice(i,1);
-  const shown=FLOWS.reduce((n,f)=>n+f.screens.length,0);
   flowIdx=0; idx=0; prevIdx=-1;
   tabsEl.innerHTML=FLOWS.map((f,i)=>
     `<button class="flowtab" data-f="${i}"><b>${String(i+1).padStart(2,'0')}</b>${f.n}</button>`).join('');
